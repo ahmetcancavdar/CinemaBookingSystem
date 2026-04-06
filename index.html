@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Movie Theater Seat Reservation System - Reserve your seats for the latest movies">
+    <title>Movie Theater Reservation System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🎬</span>
+                <h1>CinemaBook</h1>
+            </div>
+            <p class="tagline">Seat Reservation System</p>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <!-- LEFT PANEL - User Information Form -->
+        <section class="panel left-panel" id="leftPanel">
+            <div class="panel-header">
+                <h2>User Information</h2>
+                <div class="panel-header-line"></div>
+            </div>
+            <form id="userForm" novalidate>
+                <div class="form-group">
+                    <label for="nameInput">Name</label>
+                    <input type="text" id="nameInput" placeholder="Enter your name" required>
+                    <span class="error-msg" id="nameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="surnameInput">Surname</label>
+                    <input type="text" id="surnameInput" placeholder="Enter your surname" required>
+                    <span class="error-msg" id="surnameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="emailInput">Email</label>
+                    <input type="email" id="emailInput" placeholder="Enter your email" required>
+                    <span class="error-msg" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneInput">Phone</label>
+                    <input type="text" id="phoneInput" placeholder="11-digit phone number" required>
+                    <span class="error-msg" id="phoneError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="ageInput">Age</label>
+                    <input type="number" id="ageInput" placeholder="Enter your age" required min="1">
+                    <span class="error-msg" id="ageError"></span>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <span>Submit</span>
+                </button>
+            </form>
+
+            <!-- Current user badge shown after login -->
+            <div class="current-user-badge" id="currentUserBadge" style="display: none;">
+                <div class="badge-header">
+                    <span class="badge-icon">👤</span>
+                    <span class="badge-role" id="badgeRole"></span>
+                </div>
+                <p class="badge-name" id="badgeName"></p>
+                <p class="badge-email" id="badgeEmail"></p>
+                <button class="btn-switch" id="switchUserBtn">Switch User</button>
+            </div>
+        </section>
+
+        <!-- CENTER PANEL - Seating Area -->
+        <section class="panel center-panel" id="centerPanel">
+            <div class="panel-header">
+                <h2>Seating Arrangement</h2>
+                <div class="panel-header-line"></div>
+            </div>
+
+            <!-- Blur overlay shown before login -->
+            <div class="blur-overlay" id="centerBlurOverlay">
+                <div class="blur-message">
+                    <span class="lock-icon">🔒</span>
+                    <p>Please log in first</p>
+                </div>
+            </div>
+
+            <!-- Admin Interface -->
+            <div class="admin-interface" id="adminInterface" style="display: none;">
+                <h3>Admin Interface</h3>
+                <div class="admin-controls">
+                    <div class="admin-field">
+                        <label for="rowsInput">Number of Rows</label>
+                        <input type="number" id="rowsInput" value="5" min="1" max="26">
+                    </div>
+                    <div class="admin-field">
+                        <label for="colsInput">Number of Columns</label>
+                        <input type="number" id="colsInput" value="5" min="1" max="20">
+                    </div>
+                    <button class="btn-set" id="setBtn">Set</button>
+                </div>
+            </div>
+
+            <!-- Seat Map -->
+            <div class="seat-area" id="seatArea">
+                <!-- Movie Screen -->
+                <div class="movie-screen" id="movieScreen">
+                    <div class="screen-surface">SCREEN</div>
+                    <div class="screen-glow"></div>
+                </div>
+
+                <!-- Seat Grid -->
+                <div class="seat-grid" id="seatGrid">
+                    <!-- Placeholder seats for blurred preview -->
+                </div>
+
+                <!-- Legend -->
+                <div class="seat-legend" id="seatLegend">
+                    <div class="legend-item">
+                        <div class="legend-color empty"></div>
+                        <span>Available</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color selected"></div>
+                        <span>Selected</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color reserved"></div>
+                        <span>Reserved</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT PANEL - Reservation Details -->
+        <section class="panel right-panel" id="rightPanel">
+            <div class="panel-header">
+                <h2>Selected Seats</h2>
+                <div class="panel-header-line"></div>
+            </div>
+
+            <!-- Blur overlay shown before login -->
+            <div class="blur-overlay" id="rightBlurOverlay">
+                <div class="blur-message">
+                    <span class="lock-icon">🔒</span>
+                    <p>Please log in first</p>
+                </div>
+            </div>
+
+            <div class="reservation-details" id="reservationDetails">
+                <div class="user-info-summary">
+                    <p class="detail-name" id="detailName">-</p>
+                    <span class="detail-role" id="detailRole">-</span>
+                </div>
+
+                <div class="selected-seats-list" id="selectedSeatsList">
+                    <p class="no-seats-msg">No seats selected yet</p>
+                </div>
+
+                <div class="price-section">
+                    <div class="price-row">
+                        <span>Ticket Price:</span>
+                        <span id="ticketPriceDisplay">$0</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Seats:</span>
+                        <span id="seatCountDisplay">0</span>
+                    </div>
+                    <div class="price-divider"></div>
+                    <div class="price-row total">
+                        <span>Total Price:</span>
+                        <span id="totalPriceDisplay">$0</span>
+                    </div>
+                </div>
+
+                <button class="btn-confirm" id="confirmBtn" disabled>
+                    <span>Confirm Selection</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CinemaBook — Movie Theater Reservation System</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
