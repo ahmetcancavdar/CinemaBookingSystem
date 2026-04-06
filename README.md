@@ -126,12 +126,6 @@ The default salon is initialized as a **5×5** grid. Admins can change this at a
 
 ---
 
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
 ##  Author
 
 Developed as a homework project for Internet Programming course.
